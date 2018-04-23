@@ -2,7 +2,7 @@
 
 // Get the userimage and save it with a unique id
 $sFileExtension = pathinfo($_FILES['fileUserImage']['name'], PATHINFO_EXTENSION);
-$sFolder = 'img_webshop/';
+$sFolder = 'images/';
 $sFileName = 'userimage-' . uniqid() . '.' . $sFileExtension;
 $sSaveFileTo = $sFolder . $sFileName;
 move_uploaded_file($_FILES['fileUserImage']['tmp_name'], $sSaveFileTo);
