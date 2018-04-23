@@ -1,0 +1,2011 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>SHOPAHOLIC</title>
+    <style>
+        /**********************************************************/
+
+        /*                      ALL THE CSS!                      */
+
+        /**********************************************************/
+
+        @font-face {
+            font-family: Poppins-Light;
+            src: url(css/Poppins-Light.ttf);
+        }
+
+        @font-face {
+            font-family: Poppins-Regular;
+            src: url(css/Poppins-Regular.ttf);
+        }
+
+        @font-face {
+            font-family: Poppins-Medium;
+            src: url(css/Poppins-Medium.ttf);
+        }
+
+        @font-face {
+            font-family: Poppins-Semibold;
+            src: url(css/Poppins-Semibold.ttf);
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            flex-flow: column nowrap;
+        }
+
+        header {
+            width: 100vw;
+            height: 100px;
+            background-color: #da0883;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        footer {
+            width: 100vw;
+            height: 100px;
+            background-color: #da0883;
+            display: flex;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        input,
+        select#txtUpdateUserRole {
+            width: 30%;
+            height: 50px;
+            font-family: Poppins-Regular;
+            font-size: 14px;
+            padding: 0 10px;
+        }
+
+        button {
+            height: 50px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-family: Poppins-Medium;
+            font-size: 14px;
+            background-color: transparent;
+        }
+
+        p {
+            font-family: Poppins-Regular;
+            font-size: 14px;
+        }
+
+        h3 {
+            font-family: Poppins-Light;
+            font-weight: lighter;
+        }
+
+        /**********************************************************/
+
+        /*                      ALL THE BUTTON STYLING            */
+
+        /**********************************************************/
+
+        input#txtSearchProducts {
+            margin-right: 15%;
+        }
+
+        #btnViewProducts {
+            margin-right: auto;
+        }
+
+        .btnHeader,
+        .btnFooter {
+            color: white;
+            background-color: transparent;
+        }
+
+        .btnHorizontal {
+            width: 10%;
+        }
+
+        #btnSignup,
+        #btnLogin,
+        .btnViewSubscriber {
+            background-color: transparent;
+        }
+
+        #btnCreateProduct,
+        #btnCreateUser {
+            align-items: center;
+            justify-content: center;
+            display: none;
+            margin: 20px;
+            width: 10%;
+            background-color: #da0883;
+            color: white;
+        }
+
+        .btnForm {
+            width: 30%;
+            background-color: #A2BB49;
+            color: white;
+        }
+
+        .btnEditProduct,
+        .btnDeleteProduct,
+        .btnBuyProduct,
+        .btnEditUser,
+        .btnDeleteUser {
+            margin: 10px;
+            width: 30%;
+            background-color: #A2BB49;
+            color: white;
+        }
+
+        #btnSubscribeNav {
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        /**********************************************************/
+
+        /*                      ALL THE PAGES STYLING             */
+
+        /**********************************************************/
+
+        #lblProductList,
+        #lblUserList,
+        #lblSubscriberList {
+            margin-top: 20px;
+            width: 100vw;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lblProduct,
+        .lblUser,
+        .lblSubscriber {
+            margin-top: 20px;
+            width: 30vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 2px solid lightgrey;
+        }
+
+        .popup {
+            display: none;
+            margin-top: 100px;
+        }
+
+        .page {
+            margin-bottom: 100px;
+        }
+
+        #pageViewUsers {
+            display: none;
+        }
+
+        /**********************************************************/
+
+        /*                      LIGHTBOX STYLING                  */
+
+        /**********************************************************/
+
+        .lightbox {
+            /** Default lightbox to hidden */
+            display: none;
+
+            /** Position and style */
+            position: fixed;
+            z-index: 999;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            top: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .lightbox img {
+            /** Pad the lightbox image */
+            max-width: 100%;
+            max-height: 90%;
+            margin-top: 3%;
+        }
+
+        .lightbox:target {
+            /** Remove default browser outline */
+            outline: none;
+
+            /** Unhide lightbox **/
+            display: block;
+        }
+
+        .lblProduct a {
+            text-align: center;
+        }
+
+        /**********************************************************/
+
+        /*                      ALL THE FORM STYLING              */
+
+        /**********************************************************/
+
+        #frmSortBy {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+            padding: 20px;
+        }
+
+        select#slctProductSorter {
+            height: 40px;
+            font-family: Poppins-Medium;
+            font-size: 14px;
+            color: #A2BB49;
+            margin-left: 20px;
+        }
+
+        .popup h3 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        #frmLogin,
+        #frmCreateProduct {
+            height: 22em;
+        }
+
+        #frmDeleteAccount {
+            height: 13em;
+        }
+
+        #frmUpdateUser,
+        #frmUpdateProduct {
+            height: 35em;
+        }
+
+        #frmSubscribe {
+            height: 45em;
+        }
+
+        .form {
+            height: 30em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .lblFormExtention {
+            width: 30%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .lblFileUpload {
+            width: 30%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        #txtUpdateProductImage {
+            width: 10%;
+        }
+
+        select {
+            background-color: white;
+            border-color: lightgrey;
+            border-radius: 0;
+        }
+
+        /**********************************************************/
+
+        /*                      ALL THE DROPDOWN STYLING          */
+
+        /**********************************************************/
+
+        /* Style The Dropdown Button */
+
+        #lblDropdown,
+        #lblDropdownforMobileOnly {
+            display: none;
+            margin-right: 5%;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btnDropdown {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0px 20px 0px 20px;
+        }
+
+        /* Dropdown Content (Hidden by Default) */
+
+        #lblDropdownContent,
+        #lblDropdownContentforMobileOnly {
+            display: none;
+            position: absolute;
+            margin-top: 2em;
+            width: 11em;
+            background-color: #da0883;
+            /*#ff6600;*/
+            ;
+        }
+
+        /* Show the dropdown menu on hover */
+
+        #lblDropdown:hover #lblDropdownContent,
+        #lblDropdownforMobileOnly:hover #lblDropdownContentforMobileOnly {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+            height: 10em;
+        }
+
+        .fa-caret-down {
+            font-size: 20px;
+        }
+
+        /**********************************************************/
+
+        /*                      ALL THE ERROR MESSAGE STYLING     */
+
+        /**********************************************************/
+
+        #lblWelcomeUserMessage {
+            margin-right: auto;
+            color: white;
+            font-family: Poppins-Regular;
+        }
+
+        .lblErrorMessage {
+            align-self: center;
+            width: 30%;
+            color: red;
+            font-weight: bolder;
+        }
+
+        /*.cPage{
+            display: none;
+        }
+        
+        .cPage.show{
+            display: flex;
+        }*/
+
+        /**********************************************************/
+
+        /*                      ALL THE MAP STYLING       */
+
+        /**********************************************************/
+
+        #map {
+            margin: 100px 0 100px;
+            height: 400px;
+            width: 90%;
+            align-self: center;
+        }
+
+        #mapinForm {
+            height: 400px;
+            width: 30%;
+            align-self: center;
+        }
+
+        .fa-map-marker {
+            font-size: 50px;
+            color: #A2BB49;
+        }
+
+        /**********************************************************/
+
+        /*                      ALL THE MOBILE DISPLAY STYLING    */
+
+        /**********************************************************/
+
+        @media only screen and (max-width:767px) {
+
+            #btnLoginNav,
+            #btnSignupNav {
+                display: none;
+            }
+
+            #lblDropdownforMobileOnly {
+                display: flex;
+            }
+
+            #lblDropdownforMobileOnly,
+            #lblDropdown {
+                margin-right: 0;
+            }
+
+            .lblProduct,
+            .lblUser,
+            .lblSubscriber {
+                width: 90vw;
+            }
+
+            #logo {
+                width: 30vw;
+            }
+
+            .btnEditProduct,
+            .btnDeleteProduct,
+            .btnBuyProduct,
+            .btnEditUser,
+            .btnDeleteUser,
+            #btnCreateProduct,
+            #btnCreateUser {
+                width: 50%;
+            }
+
+            input,
+            .btnForm,
+            .lblFormExtention,
+            .lblFileUpload,
+            #mapinForm,
+            select#txtUpdateUserRole {
+                width: 90%;
+            }
+
+            #mapinForm {
+                height: 300px;
+            }
+
+            #lblDropdown:hover #lblDropdownContent {
+                height: 15em;
+            }
+
+            #lblDropdownforMobileOnly:hover #lblDropdownContentforMobileOnly {
+                height: 5em;
+                width: 6em;
+            }
+
+            .btnDropdown {
+                padding-top: 10px;
+            }
+
+            #lblDropdownContent,
+            #lblDropdownContentforMobileOnly {
+                right: 3%;
+            }
+
+            #lblWelcomeUserMessage {
+                display: none;
+            }
+
+            input#txtSearchProducts {
+                margin-right: auto;
+                margin-left: auto;
+            }
+        }
+
+        /**********************************************************/
+
+        /*                      ALL THE TABLET DISPLAY STYLING    */
+
+        /**********************************************************/
+
+        @media only screen and (min-width:768px) and (max-width: 1024px) {
+
+            .lblProduct,
+            .lblUser,
+            .lblSubscriber {
+                width: 45vw;
+            }
+
+            .btnEditProduct,
+            .btnDeleteProduct,
+            .btnBuyProduct,
+            .btnEditUser,
+            .btnDeleteUser {
+                width: 50%;
+            }
+
+            #btnCreateProduct,
+            #btnCreateUser {
+                width: 30%;
+            }
+
+            input,
+            .btnForm,
+            .lblFormExtention,
+            .lblFileUpload,
+            #mapinForm,
+            select#txtUpdateUserRole {
+                width: 50%;
+            }
+
+            #mapinForm {
+                height: 300px;
+            }
+
+            #lblDropdown:hover #lblDropdownContent:hover {
+                height: 15em;
+            }
+
+            input#txtSearchProducts {
+                width: 30%;
+                margin-right: 5%;
+            }
+
+            #lblWelcomeUserMessage {
+                margin-left: 5%;
+            }
+
+            .btnHorizontal {
+                width: 15%;
+
+            }
+        }
+    </style>
+</head>
+
+<!-- ********************************************************************** -->
+<!--                                ALL THE HTML!                           -->
+<!-- ********************************************************************** -->
+
+<body>
+
+    <!-- NAVIGATION according ADMIN or USER -->
+    <header>
+        <button id="btnViewProducts" class="btnShowPage" data-showThisPage="pageViewProducts">
+            <img src="images/Fashion-Logo-6.png" alt="logo" id="logo">
+        </button>
+        <div id="lblWelcomeUserMessage"></div>
+        <input type="text" name="txtSearchProducts" id="txtSearchProducts" placeholder="Search">
+        <button type="button" class="btnShowPage btnHorizontal btnHeader" id="btnLoginNav" data-showThisPage="pageLogin">Login</button>
+        <button type="button" class="btnShowPage btnHorizontal btnHeader" id="btnSignupNav" data-showThispage="pageSignup">Signup</button>
+        <div id="lblDropdownforMobileOnly">
+            <button class="btnHeader btnDropdown">
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div id="lblDropdownContentforMobileOnly">
+                <button type="button" class="btnShowPage btnHeader btnDropdown" id="btnLoginNavMobile" data-showThisPage="pageLogin">Login</button>
+                <button type="button" class="btnShowPage btnHeader btnDropdown" id="btnSignupNavMobile" data-showThispage="pageSignup">Signup</button>
+            </div>
+        </div>
+        <div id="lblDropdown">
+            <button class="btnHeader btnDropdown">
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div id="lblDropdownContent">
+                <button type="button" id="btnEditUsersNav" class="btnShowPage btnHeader btnDropdown" data-showThisPage="pageViewUsers">Edit Users</button>
+                <button type="button" id="btnEditProductsNav" class="btnShowPage btnHeader btnDropdown" data-showThisPage="pageViewProducts">Edit Products</button>
+                <button type="button" id="btnViewSubscribersNav" class="btnShowPage btnHeader btnDropdown" data-showThisPage="pageViewSubscribers">View Subscribers</button>
+                <button type="button" id="btnEditAccountNav" class="btnShowPage btnHeader btnDropdown" data-showThisPage="pageEditAccount">Edit Account</button>
+                <button type="button" id="btnDeleteAccountNav" class="btnShowPage btnHeader btnDropdown" data-showThisPage="pageDeleteAccount">Delete Account</button>
+                <button type="button" class="btnHeader btnDropdown" id="btnLogoutNav">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ********************************************************************** -->
+    <!-- ********************************************************************** -->
+    <!-- ********************************************************************** -->
+
+    <!-- PRODUCTS display and editing is handled here according USER or ADMIN-->
+    <div id="pageViewProducts" class="page">
+        <div class="wrapper">
+            <button type="button" class="btnShowPage" id="btnCreateProduct" data-showThisPage="pageCreateProduct">
+                <i class="fa fa-plus"></i>&nbsp;Add Product</button>
+            <form id="frmSortBy">
+                <p>Sort by:</p>
+                <select id="slctProductSorter">
+                    <option value="oPriceLowToHigh" selected>PRICE (LOW TO HIGH)</option>
+                    <option value="oPriceHighToLow">PRICE (HIGH TO LOW</option>
+                </select>
+            </form>
+            <div id="lblProductList">
+                <!-- Generated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ********************************************************************** -->
+    <!-- ********************************************************************** -->
+    <!-- ********************************************************************** -->
+
+    <!-- USERS display and editing is handled here ONLY for ADMIN -->
+    <div id="pageViewUsers" class="page">
+        <div class="wrapper">
+            <button type="button" class="btnShowPage" id="btnCreateUser" data-showThisPage="pageCreateUser">
+                <i class="fa fa-plus"></i>&nbsp;Add User</button>
+            <div id="lblUserList">
+
+                <!-- Generated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ********************************************************************** -->
+    <!-- ********************************************************************** -->
+    <!-- ********************************************************************** -->
+
+    <!-- SUBSCRIBERS display is handled here ONLY for ADMIN -->
+    <div id="pageViewSubscribers" class="page popup">
+        <div class="wrapper">
+            <div id="lblSubscriberList">
+                <!-- Generated dynamically -->
+            </div>
+            <div id="map">
+                <!-- Generated dynamically -->
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- ********************************************************************** -->
+    <!-- ********************************************************************** -->
+    <!-- ********************************************************************** -->
+
+    <!-- SIGNUP for USERS and ADMIN -->
+    <div id="pageSignup" class="page popup">
+        <div class="wrapper">
+            <h3>SIGNUP</h3>
+            <form class="form" id="frmSignup">
+                <input type="text" name="txtEmailorPhoneNumber" placeholder="Mobile number or Email" required>
+                <input type="text" name="txtName" placeholder="Name" required>
+                <input type="text" name="txtLastName" placeholder="Lastname" required>
+                <input type="password" name="txtPassword" placeholder="Password" required>
+                <div class="lblFileUpload">
+                    <p>Select your picture:</p>
+                    <input type="file" name="fileUserImage" required>
+                </div>
+                <button type="button" class="btnForm" id="btnSignupForm">Signup</button>
+                <div class="lblFormExtention">
+                    <p class="pyesAccount">Already have an account?</p>
+                    <button type="button" class="btnShowPage" id="btnLogin" data-showThisPage="pageLogin">Login</button>
+                </div>
+            </form>
+            <h3 class="lblMessage" id="lblSignupMessage"></h3>
+        </div>
+    </div>
+
+    <!-- ********************************************************************** -->
+    <!-- ********************************************************************** -->
+    <!-- ********************************************************************** -->
+
+    <!-- LOGIN for USERS and ADMIN -->
+    <div id="pageLogin" class="page popup">
+        <div class="wrapper">
+            <h3>LOGIN</h3>
+            <form class="form" id="frmLogin">
+                <input type="text" name="txtEmailorPhoneNumber" placeholder="Mobile number or Email" required>
+                <input type="text" name="txtPassword" placeholder="Password" required>
+                <button type="button" class="btnForm" id="btnLoginForm">Login</button>
+                <div class="lblFormExtention">
+                    <p class="pnoAccount">Don´t have an account?</p>
+                    <button type="button" class="btnShowPage" id="btnSignup">Signup</button>
+                </div>
+            </form>
+            <h3 class="lblMessage" id="lblLoginMessage"></h3>
+        </div>
+    </div>
+
+    <!-- ********************************************************************** -->
+    <!-- ********************************************************************** -->
+    <!-- ********************************************************************** -->
+
+    <!-- SUBSCRIBE for USERS -->
+    <div id="pageSubscribe" class="page popup">
+        <div class="wrapper">
+            <h3>SUBSCRIBE TO OUR NEWSLETTER</h3>
+            <form class="form" id="frmSubscribe">
+                <input type="text" name="txtEmail" placeholder="Email" required>
+                <input type="text" name="txtName" placeholder="Name" required>
+                <input type="text" name="txtLastName" placeholder="Lastname" required>
+                <input type="text" name="txtAddress" placeholder="Address" required>
+                <div id="mapinForm">
+                    <!-- Generated dynamically -->
+                </div>
+                <button type="button" class="btnForm" id="btnSubscribeForm">Subscribe</button>
+            </form>
+            <h3 class="lblMessage" id="lblSubscribeMessage"></h3>
+        </div>
+    </div>
+
+
+    <!-- ********************************************************************** -->
+    <!-- ********************************************************************** -->
+    <!-- ********************************************************************** -->
+
+    <!-- EDIT own account for USERS and ADMIN -->
+    <div id="pageEditAccount" class="page popup">
+        <div class="wrapper">
+            <h3>EDIT ACCOUNT</h3>
+            <form class="form" id="frmEditAccount">
+                <input type="hidden" name="txtEditAccountId" id="txtEditAccountId">
+                <input type="text" id="txtEditAccountEmailorPhoneNumber" name="txtEditAccountEmailorPhoneNumber" placeholder="Mobile number or Email">
+                <input type="text" id="txtEditAccountName" name="txtEditAccountName" placeholder="Name">
+                <input type="text" id="txtEditAccountLastName" name="txtEditAccountLastName" placeholder="Lastname">
+                <input type="password" id="txtEditAccountPassword" name="txtEditAccountPassword" placeholder="Password">
+                <img id="txtEditAccountImage" alt="AccountImage">
+                <div class="lblFileUpload">
+                    <p>Select your picture:</p>
+                    <input type="file" name="fileUserImage">
+                </div>
+                <button type="button" class="btnForm" id="btnEditAccountForm">Update</button>
+            </form>
+            <h3 class="lblMessage" id="lblEditAccountMessage"></h3>
+        </div>
+    </div>
+
+    <!-- ********************************************************************** -->
+    <!-- ********************************************************************** -->
+    <!-- ********************************************************************** -->
+
+    <!-- DELETE own account for USERS and ADMIN -->
+    <div id="pageDeleteAccount" class="page popup">
+        <div class="wrapper">
+            <h3>DELETE ACCOUNT</h3>
+            <form class="form" id="frmDeleteAccount">
+                <input type="text" id="txtDeleteAccountEmailorPhoneNumber" name="txtDeleteAccountEmailorPhoneNumber" placeholder="Mobile number or Email">
+                <input type="password" name="txtPassword" placeholder="Password">
+                <button type="button" class="btnForm" id="btnDeleteAccountForm">Delete</button>
+            </form>
+            <h3 class="lblMessage" id="lblDeleteAccountMessage"></h3>
+        </div>
+    </div>
+
+    <!-- ********************************************************************** -->
+    <!-- ********************************************************************** -->
+    <!-- ********************************************************************** -->
+
+    <!-- CREATE product for ADMIN -->
+    <div id="pageCreateProduct" class="page popup">
+        <div class="wrapper">
+            <h3>ADD PRODUCT</h3>
+            <form class="form" id="frmCreateProduct">
+                <input type="text" name="txtProductName" placeholder="Product Name" required>
+                <input type="number" name="nrProductPrice" placeholder="Product Price" required>
+                <input type="number" name="nrProductQuantity" placeholder="Product Quantity" required>
+                <div class="lblFileUpload">
+                    <p>Select your product:</p>
+                    <input type="file" name="fileProductImage" required>
+                </div>
+                <button type="button" class="btnForm" id="btnCreateProductForm">Add Product</button>
+            </form>
+            <h3 class="lblMessage" id="lblCreateProductMessage"></h3>
+        </div>
+    </div>
+
+    <!-- CREATE user for ADMIN -->
+    <div id="pageCreateUser" class="page popup">
+        <div class="wrapper">
+            <h3>ADD USER</h3>
+            <form class="form" id="frmCreateUser">
+                <input type="text" id="txtUserEmailorPhoneNumber" name="txtUserEmailorPhoneNumber" placeholder="Mobile number or Email">
+                <input type="text" name="txtUserName" placeholder="Name" required>
+                <input type="text" name="txtUserLastName" placeholder="Lastname" required>
+                <input type="password" name="txtUserPassword" placeholder="Password" required>
+                <div class="lblFileUpload">
+                    <p>Select user picture:</p>
+                    <input type="file" name="fileUserImage" required>
+                </div>
+                <button type="button" class="btnForm" id="btnCreateUserForm">Add User</button>
+            </form>
+            <h3 class="lblMessage" id="lblCreateUserMessage"></h3>
+        </div>
+    </div>
+
+    <!-- ********************************************************************** -->
+    <!-- ********************************************************************** -->
+    <!-- ********************************************************************** -->
+
+    <!-- UPDATE product for ADMIN -->
+    <div id="pageUpdateProduct" class="page popup">
+        <div class="wrapper">
+            <h3>UPDATE PRODUCT</h3>
+            <form class="form" id="frmUpdateProduct">
+                <input type="hidden" id="txtUpdateProductId" name="txtUpdateProductId">
+                <input type="text" id="txtUpdateProductName" name="txtUpdateProductName" placeholder="Product Name">
+                <input type="number" id="nrUpdateProductPrice" name="nrUpdateProductPrice" placeholder="Product Price">
+                <input type="number" id="nrUpdateProductQuantity" name="nrUpdateProductQuantity" placeholder="Product Quantity">
+                <img id="txtUpdateProductImage" alt="ProductImage">
+                <div class="lblFileUpload">
+                    <p>Select your product:</p>
+                    <input type="file" name="fileProductImage">
+                </div>
+                <button type="button" class="btnForm" id="btnUpdateProductForm">Update Product</button>
+            </form>
+            <h3 class="lblMessage" id="lblUpdateProductMessage"></h3>
+        </div>
+    </div>
+
+    <!-- ********************************************************************** -->
+    <!-- ********************************************************************** -->
+    <!-- ********************************************************************** -->
+
+    <!-- UPDATE user for ADMIN -->
+    <div id="pageUpdateUser" class="page popup">
+        <div class="wrapper">
+            <h3>UPDATE USER</h3>
+            <form class="form" id="frmUpdateUser">
+                <input type="hidden" id="txtUpdateUserId" name="txtUpdateUserId">
+                <select name="txtUpdateUserRole" id="txtUpdateUserRole">
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                </select>
+                <input type="text" id="txtUpdateUserEmailorPhoneNumber" name="txtUpdateUserEmailorPhoneNumber" placeholder="Mobile number or Email">
+                <input type="text" id="txtUpdateUserName" name="txtUpdateUserName" placeholder="Name">
+                <input type="text" id="txtUpdateUserLastName" name="txtUpdateUserLastName" placeholder="Lastname">
+                <input type="password" id="txtUpdateUserPassword" name="txtUpdateUserPassword" placeholder="Password">
+                <img id="txtUpdateUserImage" alt="UserImage">
+                <div class="lblFileUpload">
+                    <p>Select your picture:</p>
+                    <input type="file" name="fileUserImage">
+                </div>
+                <button type="button" class="btnForm" id="btnUpdateUserForm">Update User</button>
+            </form>
+            <h3 class="lblMessage" id="lblUpdateUserMessage"></h3>
+        </div>
+    </div>
+
+    <!-- ********************************************************************** -->
+    <!-- ********************************************************************** -->
+    <!-- ********************************************************************** -->
+
+    <!-- FOOTER -->
+    <footer>
+
+        <button type="button" class="btnShowPage btnFooter" id="btnSubscribeNav" data-showThispage="pageSubscribe">Subscribe to newsletter</button>
+
+    </footer>
+
+    <!-- ********************************************************************** -->
+    <!--                                END HTML                                -->
+    <!-- ********************************************************************** -->
+
+    <script>
+        /************************************************************************/
+        /************************************************************************/
+        //                      All the JAVASCRIPT!
+        /************************************************************************/
+        /************************************************************************/
+
+        // Declare GLOBAL VARIABLES for the SESSIONSTORAGE 
+        var loggedin = false;
+        var sSessionRole = "";
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+        // SET VALUES to VARIABLES if there is a SESSION  
+        if (sessionStorage.getItem('status') !== null) {
+            // console.log( "loggedin" );
+            loggedin = true;
+            sSessionRole = sessionStorage.getItem('role');
+        }
+
+        // GLOBAL ARRAY for storing any DATA from the SERVER
+        var ajDataFromServer = [];
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+        // INITIALIZE / populate home page with products
+        getAjax("apis/api_get_products.php", getProductData);
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+        // Main ajax function using callback for posting data to the server
+        function postAjax(sUrl, frmData, callback) {
+            var ajax = new XMLHttpRequest();
+            ajax.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var ajDataFromServer = JSON.parse(this.responseText);
+                    callback(ajDataFromServer);
+                }
+            }
+
+            ajax.open("POST", sUrl, true);
+            var jFrm = new FormData(frmData);
+            ajax.send(jFrm)
+        }
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+        // Main ajax function using callback for getting data from the server
+        function getAjax(sUrl, callback) {
+            var ajax = new XMLHttpRequest();
+            ajax.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    ajDataFromServer = JSON.parse(this.responseText);
+                    callback(ajDataFromServer);
+                }
+            }
+
+            ajax.open("GET", sUrl, true);
+            ajax.send();
+
+        }
+        //console.log(new XMLHttpRequest())
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+        // DO the SIGNUP, POST data to the SERVER with AJAX
+
+        btnSignupForm.addEventListener("click", function () {
+            postAjax("apis/api_signup_users.php", frmSignup, signupUser);
+        });
+
+        function signupUser(ajUserDataFromServer) {
+
+            if (ajUserDataFromServer.status === "ok") {
+
+                //console.log( "SIGNUP SUCCESFULL" );
+                pageSignup.style.display = "none";
+                pageLogin.style.display = "flex";
+                showSuccessMessage("lblLoginMessage", "Account succesfully created - Signup please");
+
+            } else {
+
+                //console.log( "SIGNUP FAIL - TRY AGAIN" );
+                pageSignup.style.display = "flex";
+                showErrorMessage("lblLoginMessage", "Signup Failed - Try again");
+            }
+        }
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+
+        function showSuccessMessage(id, sSuccessMessage) {
+            var lblMessage = document.getElementById(id);
+            lblMessage.innerHTML = sSuccessMessage.fontcolor("#549839");
+        }
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+
+        function showErrorMessage(id, sErrorMessage) {
+            var lblMessage = document.getElementById(id);
+            lblMessage.innerHTML = sErrorMessage.fontcolor("red");
+        }
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+        // DO the LOGIN, POST data to the SERVER with AJAX
+        // Logs in the user and displays different HTML bits according diffrent roles by using sessionstorage
+        btnLoginForm.addEventListener("click", function () {
+            postAjax("apis/api_login_users.php", frmLogin, loginUser);
+        });
+
+        function loginUser(ajUserDataFromServer) {
+
+            if (ajUserDataFromServer.status === "ok") {
+
+                pageLogin.style.display = "none";
+                //after login also sets key values to the sessionstorage
+                sessionStorage.setItem('status', 'loggedin');
+                sessionStorage.setItem('id', ajUserDataFromServer.id);
+                sessionStorage.setItem('role', ajUserDataFromServer.role);
+                sessionStorage.setItem('username', ajUserDataFromServer.username);
+                sessionStorage.setItem('name', ajUserDataFromServer.name);
+                sessionStorage.setItem('lastname', ajUserDataFromServer.lastname);
+                sessionStorage.setItem('image', ajUserDataFromServer.image);
+
+                loggedin = true;
+                sSessionRole = sessionStorage.getItem('role');
+                console.log(sSessionRole)
+
+                // for ADMIN view 
+                if ((loggedin === true) && (sSessionRole === "admin")) {
+
+                    showWelcomeMessage();
+                    showInterface(isAdmin = true);
+                    getAjax("apis/api_get_products.php", getProductData);
+                    getAjax("apis/api_get_users.php", getUserData);
+                    getAjax("apis/api_get_subscribers.php", getSubscriberData);
+
+
+                    // for USER view 
+                } else if (loggedin === true && sSessionRole === "user") {
+
+                    showWelcomeMessage();
+                    showInterface(isAdmin = false);
+
+                }
+
+            } else {
+
+                //console.log( "LOGIN FAIL - TRY AGAIN" );
+                pageLogin.style.display = "flex";
+                showErrorMessage("lblLoginMessage", "Login Failed - Try again");
+
+            }
+        }
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+
+        // KEEPS THE SESSION when reload
+
+        (function sessionUser() {
+
+
+            // for ADMIN view 
+            if (sSessionRole == "admin") {
+
+                showWelcomeMessage();
+                showInterface(isAdmin = true);
+                getAjax("apis/api_get_users.php", getUserData);
+                getAjax("apis/api_get_subscribers.php", getSubscriberData);
+            }
+
+            // for USER view 
+            if (sSessionRole == "user") {
+
+                showWelcomeMessage();
+                showInterface(isAdmin = false);
+
+            }
+
+        })();
+
+        // GET all users from from the server in order to display / CRUD for the admin 
+        function getUserData(ajUserDataFromServer) {
+            //console.log( "USERS ARE EDITABLE" );
+            showUsers(ajUserDataFromServer);
+        }
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+
+        // DISPLAY ALL users dinamically using a loop and then INSERT into HTML
+        function showUsers(ajUserDataFromServer) {
+
+            lblUserList.innerHTML = "";
+
+            for (var i = 0; i < ajUserDataFromServer.length; i++) {
+
+                var lblUser = document.createElement('div');
+                lblUser.classList.add("lblUser");
+
+                lblUser.innerHTML = '<img src="' + ajUserDataFromServer[i].image +
+                    '" alt="user" class="lblUserImage" data-userImage="' + ajUserDataFromServer[i].image + '">' +
+                    '<h3 class="lblUserId" data-userId"' + ajUserDataFromServer[i].id + '">' + 'Id:' + ' ' +
+                    ajUserDataFromServer[i].id + '</h3>' + '<h3 class="lblUserRole" data-userRole="' +
+                    ajUserDataFromServer[i].role + '">' + 'Role:' + ' ' + ajUserDataFromServer[i].role +
+                    '</h3>' + '<h3 class="lblUserEmailorPhoneNumber" data-userEmailorPhoneNumber="' +
+                    ajUserDataFromServer[i].username + '">' + 'Username:' + ' ' + ajUserDataFromServer[i].username +
+                    '</h3>' + '<h3 class="lblUserName" data-userName="' + ajUserDataFromServer[i].name + '">' +
+                    'Name:' + ' ' + ajUserDataFromServer[i].name + '</h3>' +
+                    '<h3 class ="lblUserLastName" data-userLastName="' + ajUserDataFromServer[i].lastname +
+                    '">' +
+                    'Lastname:' + ' ' + ajUserDataFromServer[i].lastname + '</h3>' +
+                    '<h3 class="lblUserPassword" data-userPassword="' + ajUserDataFromServer[i].password + '">' +
+                    'Password:' + ' ' + ajUserDataFromServer[i].password + '</h3>' +
+                    '<button id="btnEditUserBody" class="btnShowPage btnEditUser" data-userId="' +
+                    ajUserDataFromServer[
+                        i].id + '" data-showThisPage="pageUpdateUser">' + 'EDIT USER' + '</button>' +
+                    '<button class="btnDeleteUser" data-userId="' + ajUserDataFromServer[i].id + '" >' +
+                    'DELETE USER' + '</button>' + '<h3 class="lblErrorMessage" id="lblDeleteUserErrorMessage">' +
+                    '</h3>';
+
+                lblUserList.appendChild(lblUser);
+
+                showPages();
+
+            }
+        }
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+        function initInterface() {
+            lblDropdown.style.display = "flex";
+            pageViewProducts.style.display = "flex";
+            btnSignupNav.style.display = "none";
+            btnLoginNav.style.display = "none";
+        }
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+
+        function showInterface() {
+            initInterface();
+            btnEditUsersNav.style.display = isAdmin ? "flex" : "none";
+            btnEditProductsNav.style.display = isAdmin ? "flex" : "none";
+            btnCreateProduct.style.display = isAdmin ? "flex" : "none";
+            btnCreateUser.style.display = isAdmin ? "flex" : "none";
+            btnViewSubscribersNav.style.display = isAdmin ? "flex" : "none";
+        }
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+        // Dynamic HTML / user interface for ALL users
+        function showWelcomeMessage() {
+
+            lblWelcomeUserMessage.innerHTML = ""; // since I am calling the function multiple times it needs to clear previous messages
+
+            var sWelcomeUserMessage = '<h3>' + 'Welcome:' + '  ' + sessionStorage.getItem('name') +
+                '  ' + sessionStorage.getItem('lastname') + '  ' + sSessionRole + ' </h3>';
+            var iUserImage = '<img src=" ' + sessionStorage.getItem('image') + ' " width="50px">';
+            lblWelcomeUserMessage.insertAdjacentHTML('beforeend', sWelcomeUserMessage + iUserImage);
+        }
+        /* beforebegin
+         <p>
+         afterbegin
+         beforeend
+        </p> 
+        afterend */
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+
+        // Updates own account for ALL with POST
+        btnEditAccountForm.addEventListener("click", function () {
+            postAjax("apis/api_edit_account.php", frmEditAccount, editOwnAccount);
+        });
+
+        function editOwnAccount(ajUserDataFromServer) {
+            //console.log( txtEditAccountId.value); 
+            if (ajUserDataFromServer.status == "ok") {
+
+                //console.log( "ACCOUNT UPDATED" );
+                pageEditAccount.style.display = "none";
+                pageViewProducts.style.display = "flex";
+
+                sessionStorage.setItem('username', ajUserDataFromServer.username);
+                sessionStorage.setItem('name', ajUserDataFromServer.name);
+                sessionStorage.setItem('lastname', ajUserDataFromServer.lastname);
+                sessionStorage.setItem('image', ajUserDataFromServer.image);
+                showWelcomeMessage();
+
+            } else {
+
+                //console.log( "UPDATE FAIL" );
+                pageEditAccount.style.display = "flex";
+                showErrorMessage("lblEditAccountMessage", "Updating Account Failed - Try again");
+
+            }
+
+        }
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+
+        // Delete own ACCOUNT for ALL with POST
+        btnDeleteAccountForm.addEventListener("click", function () {
+            postAjax("apis/api_delete_account.php", frmDeleteAccount, deleteAccount);
+        });
+
+        function deleteAccount(ajUserDataFromServer) {
+
+            if (ajUserDataFromServer.status == "ok") {
+
+                //console.log( "ACCOUNT DELETED" );
+
+                logoutUser();
+
+            } else {
+
+                //console.log( "DELETE FAIL" );
+                pageDeleteAccount.style.display = "flex";
+                showErrorMessage("lblDeleteAccountMessage", "Deleting Account Failed - Try again");
+
+            }
+
+        }
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+
+        btnCreateUserForm.addEventListener("click", function () {
+            postAjax("apis/api_create_user.php", frmCreateUser, createUser);
+        });
+
+        function createUser(ajUserDataFromServer) {
+
+            if (ajUserDataFromServer.status == "ok") {
+
+                //console.log( "CREATING USER SUCCESFULL" );
+                pageCreateUser.style.display = "none";
+                pageViewUsers.style.display = "flex";
+                getAjax("apis/api_get_users.php", getUserData);
+
+            } else {
+
+                //console.log( "CREATING USER FAILED - TRY AGAIN" );
+                pageCreateUser.style.display = "flex";
+                showErrorMessage("lblCreateUserMessage", "Creating User Failed - Try again");
+
+            }
+        }
+
+
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+
+        // Delete users for ADMIN with GET 
+        document.addEventListener("click", function (e) {
+
+            if (e.target.classList.contains("btnDeleteUser")) {
+                /// get users based on id
+                sUserId = e.target.getAttribute("data-userId");
+                //console.log(sUserId);
+                /*getAjax("api_delete_user.php?id=" + sUserId, function (ajUserDataFromServer) {
+                    deleteUser(e, ajUserDataFromServer);
+                })*/
+                /*getAjax("api_delete_user.php?id=" + sUserId, (ajUserDataFromServer) => {
+                    deleteUser(e, ajUserDataFromServer); 
+                })*/
+                getAjax("apis/api_delete_user.php?id=" + sUserId, deleteUser.bind(this, e));
+
+            }
+        });
+
+        function deleteUser(e, ajUserDataFromServer) {
+
+            if (ajUserDataFromServer.status == "ok") {
+
+                //console.log( "USER DELETED FROM THE DATABASE" );
+                e.target.parentNode.parentNode.removeChild(e.target.parentNode);
+
+            } else {
+
+                //console.log("USER NOT DELETED FROM THE DATABASE");
+                showErrorMessage("Deleting User Failed - Try again");
+
+            }
+        }
+
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+
+        // LOG OUT ALL and CLEAR sessionstorage
+
+        btnLogoutNav.addEventListener("click", logoutUser);
+
+        function logoutUser() {
+
+            var ajax = new XMLHttpRequest();
+            ajax.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    sessionStorage.clear();
+                    location.reload();
+
+                }
+            }
+
+            ajax.open("GET", "apis/api_logout.php", true);
+            ajax.send();
+        }
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+        btnCreateProductForm.addEventListener("click", function () {
+            postAjax("apis/api_create_product.php", frmCreateProduct, createProduct);
+        });
+
+        //creating products
+        function createProduct(ajProductDataFromServer) {
+
+            if (ajProductDataFromServer.status == "ok") {
+
+                //console.log( "ADD PRODUCT SUCCESFULL" )
+                pageCreateProduct.style.display = "none";
+                showInterface(isAdmin = true);
+                getAjax("apis/api_get_products.php", getProductData);
+
+            } else {
+
+                //console.log( "ADD PRODUCT FAIL - TRY AGAIN" );
+                pageCreateProduct.style.display = "flex";
+                showErrorMessage("lblCreateProductMessage", "Adding Product Failed - Try again");
+            }
+        }
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+        // GET ALL PRODUCTS and display them with diffrent features according role
+        function getProductData(ajProductDataFromServer) {
+
+            if (sSessionRole === "admin") {
+                //console.log( "PRODUCTS ARE EDITABLE" );
+                showProductAdmin(ajProductDataFromServer);
+
+            } else if (sSessionRole === "user") {
+                //console.log( "PRODUCTS ARE AVAILABLE FOR USER" );
+                showProduct(ajProductDataFromServer);
+
+            } else {
+                //console.log( "PRODUCTS AVAILABLE FOR PUBLIC" );
+                showProduct(ajProductDataFromServer);
+            }
+        }
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+        txtSearchProducts.addEventListener("keyup", function () {
+
+            var aPages = document.getElementsByClassName("page");
+            for (var j = 0; j < aPages.length; j++) {
+                aPages[j].style.display = "none";
+            }
+            pageViewProducts.style.display = "flex";
+
+            var sSearch = document.getElementById("txtSearchProducts").value;
+            //console.log( sSearch );
+            var sSearchUpperCase = sSearch.toUpperCase();
+            var sUrl = "apis/api_search_products.php?search=" + sSearchUpperCase;
+            getAjax("apis/api_search_products.php?search=" + sSearchUpperCase, searchProduct);
+
+        });
+
+        function searchProduct(ajProductDataFromServer) {
+
+            if (sSessionRole === "admin") {
+
+                showProductAdmin(ajProductDataFromServer);
+                //console.log ("SEARCH FOUND");
+
+            } else {
+
+                showProduct(ajProductDataFromServer);
+                //console.log ("SEARCH FOUND");     
+            }
+
+        }
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+        // GET ALL PRODUCTS and sort them by price HIGH to LOW 
+        slctProductSorter.addEventListener("change", function () {
+
+            var request = new XMLHttpRequest();
+            request.onreadystatechange = function () {
+
+                if (this.readyState == 4 && this.status == 200) {
+
+                    ajProductDataFromServer = JSON.parse(this.responseText);
+                    //console.log( "Response:" + ajProductDataFromServer ); 
+
+                    if (slctProductSorter.value == "oPriceHighToLow") {
+
+                        if (sSessionRole === "admin") {
+
+                            showProductAdmin(ajProductDataFromServer);
+                        } else {
+
+                            showProduct(ajProductDataFromServer);
+                        }
+                    } else if (slctProductSorter.value == "oPriceLowToHigh") {
+
+                        showPricelowToHigh();
+
+                    }
+
+                }
+            }
+
+            request.open("GET", "apis/api_sort_price_highTolow.php", true);
+            request.send();
+
+        });
+
+
+        // GET ALL PRODUCTS and sort them by price LOW to HIGH
+        function showPricelowToHigh() {
+
+            var request = new XMLHttpRequest();
+            request.onreadystatechange = function () {
+
+                if (this.readyState == 4 && this.status == 200) {
+
+                    ajProductDataFromServer = JSON.parse(this.responseText);
+                    //console.log( "Response:" + ajProductDataFromServer ); 
+
+                    if (sSessionRole === "admin") {
+
+                        showProductAdmin(ajProductDataFromServer);
+                    } else {
+
+                        showProduct(ajProductDataFromServer);
+                    }
+                }
+            }
+
+            request.open("GET", "apis/api_sort_price_lowTohigh.php", true);
+            request.send();
+
+        }
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+
+        // DISPLAY PRODUCTS for ADMIN dinamically using a loop and then INSERT into HTML
+        function showProductAdmin(ajProductDataFromServer) {
+
+            lblProductList.innerHTML = "";
+
+            for (var i = 0; i < ajProductDataFromServer.length; i++) {
+
+                var lblProduct = '<div class="lblProduct">' + '<a href="#' + ajProductDataFromServer[i].image +
+                    '">' +
+                    '<img src="' + ajProductDataFromServer[i].image +
+                    '" width="85%" alt="product" class="lblProductImage" data-productImage="' +
+                    ajProductDataFromServer[
+                        i].image + '">' + '</a>' + '<a href="#_" class="lightbox" id="' +
+                    ajProductDataFromServer[i].image +
+                    '">' + '<img src="' + ajProductDataFromServer[i].image + '">' + '</a>' +
+                    '<h3 class ="lblProductName" data-productName="' + ajProductDataFromServer[i].name +
+                    '" >' +
+                    ajProductDataFromServer[i].name + '</h3>' +
+                    '<h3 class ="lblProductPrice" data-productPrice="' +
+                    ajProductDataFromServer[i].price + '">' + 'Price:' + ' ' + ajProductDataFromServer[i].price +
+                    '</h3>' + '<h3 class ="lblProductQuantity" data-productQuantity="' +
+                    ajProductDataFromServer[i].quantity +
+                    '">' + 'Quantity:' + ' ' + ajProductDataFromServer[i].quantity + '</h3>' +
+                    '<button id="btnEditProductBody" class="btnShowPage btnEditProduct" data-showThisPage="pageUpdateProduct" data-productId="' +
+                    ajProductDataFromServer[i].id + '">' + 'EDIT PRODUCT' + '</button>' +
+                    '<button class="btnDeleteProduct" data-productId="' + ajProductDataFromServer[i].id +
+                    '" >' +
+                    'DELETE PRODUCT' + '</button>' +
+                    '<h3 class="lblErrorMessage" id="lblDeleteProductErrorMessage">' +
+                    '</h3>' + '</div>';
+
+                lblProductList.insertAdjacentHTML('beforeend', lblProduct);
+                showPages();
+
+            }
+
+        }
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+
+        // DISPLAY PRODUCTS for USER / PUBLIC dinamically using a loop and then INSERT into HTML
+        function showProduct(ajProductDataFromServer) {
+            lblProductList.innerHTML = "";
+
+            for (var i = 0; i < ajProductDataFromServer.length; i++) {
+
+                var lblProduct = '<div class ="lblProduct">' + '<a href="#' + ajProductDataFromServer[i].image +
+                    '">' +
+                    '<img src="' + ajProductDataFromServer[i].image +
+                    '" width="85%" class="lblProductImage" alt="product">' + '</a>' +
+                    '<a href="#_" class="lightbox" id="' + ajProductDataFromServer[i].image + '">' +
+                    '<img src="' +
+                    ajProductDataFromServer[i].image + '">' + '</a>' + '<h3 class ="lblProductName">' +
+                    ajProductDataFromServer[i].name + '</h3>' + '<h3 class ="lblProductPrice">' + 'Price:' +
+                    ' ' +
+                    ajProductDataFromServer[i].price + '<h3 class ="lblProductQuantity">' + 'Quantity:' +
+                    ' ' +
+                    ajProductDataFromServer[i].quantity + '</h3>' +
+                    '<button class="btnBuyProduct" data-productId="' +
+                    ajProductDataFromServer[i].id + '" >' + 'BUY PRODUCT' + '</button>' + '</div>';
+
+                lblProductList.insertAdjacentHTML('beforeend', lblProduct);
+            }
+        }
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+
+        // hide and show pages on button clicks with data attribute
+        function showPages() {
+
+            var aBtnShowPages = document.getElementsByClassName("btnShowPage");
+            // this is an array
+            for (var i = 0; i < aBtnShowPages.length; i++) {
+
+                aBtnShowPages[i].addEventListener("click", function () {
+                    //console.log( "WORKS" ); 
+                    // Hide the pages
+                    var aPages = document.getElementsByClassName("page");
+                    for (var j = 0; j < aPages.length; j++) {
+                        aPages[j].style.display = "none";
+                    }
+
+                    var sDataAttribute = this.getAttribute("data-showThisPage");
+                    //console.log( sDataAttribute );
+                    document.getElementById(sDataAttribute).style.display = "flex";
+                    initMap(); //Initialize map function
+                });
+
+            }
+
+        }
+
+        showPages();
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+
+        // DELETE product for ADMIN based on ID
+        document.addEventListener("click", function (e) {
+
+            if (e.target.classList.contains("btnDeleteProduct")) {
+
+                sProductId = e.target.getAttribute("data-productId");
+                getAjax("apis/api_delete_product.php?id=" + sProductId, deleteProduct.bind(this, e));
+
+            }
+        });
+
+        function deleteProduct(e, ajProductDataFromServer) {
+
+            if (ajProductDataFromServer.status == "ok") {
+
+                //console.log( "PRODUCT DELETED FROM THE DATABASE" );
+                e.target.parentNode.parentNode.removeChild(e.target.parentNode);
+
+            } else {
+
+                //console.log( "PRODUCT NOT DELETED FROM THE DATABASE" );
+                showErrorMessage("Deleting Product Failed - Try again");
+
+            }
+        }
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+
+        // BUY product for user
+        document.addEventListener("click", function (e) {
+
+            if (e.target.classList.contains("btnBuyProduct")) {
+
+                sProductId = e.target.getAttribute("data-productId");
+                getAjax("apis/api_buy_product.php?id=" + sProductId, buyProduct.bind(this, e));
+
+            }
+        });
+
+        function buyProduct(e, ajProductDataFromServer) {
+
+            if (ajProductDataFromServer.status == "ok") {
+
+                if (!window.Notification) {
+
+                    alert("Sorry, Notification Not supported in this Browser!");
+
+                } else {
+
+                    if (Notification.permission === 'granted') {
+
+                        notify = new Notification('SHOPAHOLIC.com', {
+                            body: 'The product has been added to your shopping cart!"', // the name of the pruduct
+                            icon: e.target.parentNode.children[0].children[0].src // I show the respective product image
+                        });
+                    }
+                }
+
+                playSound();
+
+                getAjax("apis/api_get_products.php", getProductData);
+                //console.log( "PRODUCT QUANTITY DECREASED IN THE DATABASE" );
+
+            } else {
+
+                //console.log( "PRODUCT QUANTITY DID NOT DECREASE IN THE DATABASE" );
+                showErrorMessage("Buying Product Failed - Try again");
+
+            }
+        }
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+
+        function playSound() {
+
+            var oSound = new Audio('sounds/Coin-collect-sound-effect.mp3');
+            oSound.play();
+
+        }
+
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+
+        // Update product ADMIN
+        document.addEventListener("click", function (e) {
+
+            if (e.target.classList.contains("btnEditProduct")) {
+
+                // does the following on the click of the dynamic edit button.
+                // creates new variables which has the key values of the JSON OBJECTS products 
+                sProductId = e.target.getAttribute("data-productId");
+                //console.log(sProductId);
+                //console.log(e.target);           // or children[i]
+                sProductName = e.target.parentNode.querySelector(".lblProductName").getAttribute(
+                    "data-productName");
+                //console.log(sProductName);
+                sProductPrice = e.target.parentNode.querySelector(".lblProductPrice").getAttribute(
+                    "data-productPrice");
+                //console.log(sProductPrice);
+                sProductQuantity = e.target.parentNode.querySelector(".lblProductQuantity").getAttribute(
+                    "data-productQuantity");
+                //console.log(sProductQuantity);
+                sProductImage = e.target.parentNode.querySelector(".lblProductImage").getAttribute(
+                    "data-productImage");
+
+                // and sets that as a value for the textbox when you navigate to the page
+                document.getElementById("txtUpdateProductId").value = sProductId;
+                document.getElementById("txtUpdateProductName").value = sProductName;
+                document.getElementById("nrUpdateProductPrice").value = sProductPrice;
+                document.getElementById("nrUpdateProductQuantity").value = sProductQuantity;
+                document.getElementById("txtUpdateProductImage").src = sProductImage;
+
+
+            }
+        });
+
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+
+        // Update user ADMIN
+        document.addEventListener("click", function (e) {
+
+            if (e.target.classList.contains("btnEditUser")) {
+
+                // creates new variables which has the key values of the JSON OBJECTS products 
+                sUserId = e.target.getAttribute("data-userId");
+                //console.log( sUserId ); 
+                sUserRole = e.target.parentNode.querySelector(".lblUserRole").getAttribute(
+                    "data-userRole");
+                //console.log( sUserRole );
+                sUserEmailorPhoneNumber = e.target.parentNode.querySelector(
+                    ".lblUserEmailorPhoneNumber").getAttribute(
+                    "data-userEmailorPhoneNumber");
+                //console.log( sUserEmailorPhoneNumber );
+                sUserName = e.target.parentNode.querySelector(".lblUserName").getAttribute(
+                    "data-userName");
+                //console.log( sUserName );
+                sUserLastName = e.target.parentNode.querySelector(".lblUserLastName").getAttribute(
+                    "data-userLastName");
+                //console.log( sUserLastName );
+                sUserPassword = e.target.parentNode.querySelector(".lblUserPassword").getAttribute(
+                    "data-userPassword");
+                //console.log( sUserPassword );
+                sUserImage = e.target.parentNode.querySelector(".lblUserImage").getAttribute(
+                    "data-userImage");
+
+                // and puts that into the textbox when you navigate to the page.
+                document.getElementById("txtUpdateUserId").value = sUserId;
+                document.getElementById("txtUpdateUserRole").value = sUserRole;
+                document.getElementById("txtUpdateUserEmailorPhoneNumber").value =
+                    sUserEmailorPhoneNumber;
+                document.getElementById("txtUpdateUserName").value = sUserName;
+                document.getElementById("txtUpdateUserLastName").value = sUserLastName;
+                document.getElementById("txtUpdateUserImage").src = sUserImage;
+
+            }
+        });
+
+        btnEditAccountNav.addEventListener("click", fillEditAccountInfo);
+
+        function fillEditAccountInfo() {
+
+            document.getElementById("txtEditAccountId").value = sessionStorage.getItem('id');
+            document.getElementById("txtEditAccountEmailorPhoneNumber").value = sessionStorage.getItem(
+                'username');
+            document.getElementById("txtEditAccountName").value = sessionStorage.getItem('name');
+            document.getElementById("txtEditAccountLastName").value = sessionStorage.getItem('lastname');
+            document.getElementById("txtEditAccountImage").src = sessionStorage.getItem('image');
+
+        }
+
+        btnDeleteAccountNav.addEventListener("click", fillDeleteAccountInfo);
+
+        function fillDeleteAccountInfo() {
+
+            document.getElementById("txtDeleteAccountEmailorPhoneNumber").value = sessionStorage.getItem(
+                'username');
+
+        }
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+
+        // Update product ADMIN
+        btnUpdateProductForm.addEventListener("click", function () {
+            postAjax("apis/api_edit_product.php", frmUpdateProduct, updateProduct);
+        });
+
+        //editing products
+        function updateProduct(ajProductDataFromServer) {
+
+            if (ajProductDataFromServer.status == "ok") {
+
+                //console.log( "PRODUCT UPDATED IN THE DATABASE" );
+                pageUpdateProduct.style.display = "none";
+                showInterface(isAdmin = true);
+                getAjax("apis/api_get_products.php", getUserData);
+
+            } else {
+
+                //console.log( "PRODUCT NOT UPDATED THE DATABASE" );
+                pageUpdateProduct.style.display = "flex";
+                showErrorMessage("lblCreateProductMessage", "Updating Product Failed - Try again");
+
+            }
+        }
+
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+        // Update user ADMIN
+        btnUpdateUserForm.addEventListener("click", function () {
+            postAjax("api_edit_user.php", frmUpdateUser, updateUser)
+        });
+
+        //editing users
+        function updateUser(ajUserDataFromServer) {
+
+            if (ajUserDataFromServer.status == "ok") {
+
+                //console.log( "USER UPDATED IN THE DATABASE" );
+                pageUpdateUser.style.display = "none";
+                pageViewUsers.style.display = "flex";
+                getAjax("apis/api_get_users.php", getUserData);
+
+            } else {
+
+                //console.log( "USER NOT UPDATED IN THE DATABASE" );
+                pageUpdateUser.style.display = "flex";
+                showErrorMessage("lblUpdateUserMessage", "Updating User Failed - Try again");
+
+            }
+        }
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+
+        // GLOBAL ARRAY for the storing any SUBSCRIBER DATA from the SERVER  
+        //var ajSubscriberDataFromServer = [];
+
+        // JSON OBEJCT for passing latitude and longtitude values from the map
+        var jMarkerPos = {};
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+        btnSubscribeForm.addEventListener("click", function () {
+            var jFrmSubscriber = new FormData(frmSubscribe);
+            jFrmSubscriber.append("lng", jMarkerPos.lng);
+            jFrmSubscriber.append("lat", jMarkerPos.lat);
+            postAjax("apis/api_save_subscribers.php", jFrmSubscriber, saveSubscriber);
+        });
+
+
+        function saveSubscriber(ajSubscriberDataFromServer) {
+
+            if (ajSubscriberDataFromServer.status == "ok") {
+
+                //console.log( "SUBSCRIBE SUCCESFULL" );
+                pageSubscribe.style.display = "flex";
+                showSuccessMessage("lblSubscribeMessage",
+                    "You have succesfully subscribed to our newletter!");
+
+            } else {
+
+                //console.log( "SUBSCRIBE FAIL - TRY AGAIN" );
+                pageSubscribe.style.display = "flex";
+                showErrorMessage("lblSubscribeMessage", "Subscription Failed - Try again");
+
+            }
+        }
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+        function initMap() {
+
+            // create the maps
+            var jLocation = {
+                zoom: 14,
+                center: new google.maps.LatLng(55.703935, 12.537669)
+            }
+            // Map in the form, when subscribe
+            var mapinForm = new google.maps.Map(document.getElementById("mapinForm"), jLocation);
+            // Map in the body, when displaying subscribers
+            var map = new google.maps.Map(document.getElementById("map"), jLocation);
+
+            var marker = new google.maps.Marker({
+
+                map: mapinForm
+
+            });
+            // TAKE lat & long on map CLICK
+            mapinForm.addListener('click', function (e) {
+                jMarkerPos.lng = e.latLng.lng();
+                jMarkerPos.lat = e.latLng.lat();
+                //console.log( jMarkerPos ); 
+                marker.setPosition(jMarkerPos);
+
+            });
+
+            // MAP action for displaying the locations
+            setMarkers(map, ajDataFromServer);
+
+            function setMarkers(map, ajSubscriberDataFromServer) {
+                var marker, i;
+                var markers = [];
+                for (i = 0; i < ajSubscriberDataFromServer.length; i++) {
+                    var locationLat = ajSubscriberDataFromServer[i].latitude;
+                    var locationLng = ajSubscriberDataFromServer[i].longtitude;
+                    latlngset = new google.maps.LatLng(locationLat, locationLng);
+
+                    // MARKER for displaying location
+                    var marker = new google.maps.Marker({
+                        position: latlngset,
+                        //map: map
+
+                    });
+
+                    // INFOWINDOW 
+                    var infowindow = new google.maps.InfoWindow({
+                        // no use filling in a content here
+                    });
+
+                    markers.push(marker);
+
+                    // INFOWINDOW action on MARKER mouseover
+                    marker.addListener('mouseover', function (e) {
+                        var index = markers.indexOf(this);
+                        var contentString = '<h3 style="font-weight: bold;">' +
+                            ajSubscriberDataFromServer[
+                                index].name + " " + ajSubscriberDataFromServer[index].lastname +
+                            '</h3>';
+                        infowindow.setContent(contentString);
+                        infowindow.open(map, markers[index]);
+                    });
+
+                }
+            }
+        }
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+
+        // GET SUBSCRIBERS to display them on the page and on map 
+
+        function getSubscriberData(ajSubscriberDataFromServer) {
+            //console.log( "DISPLAY SUBSCRIBERS" );
+            showSubscribers(ajSubscriberDataFromServer);
+            initMap(ajSubscriberDataFromServer);
+        }
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+
+
+        // DISPLAY ALL subsribers dinamically using a loop and then INSERT into HTML and on the map
+        function showSubscribers(ajSubscriberDataFromServer) {
+
+            for (var i = 0; i < ajSubscriberDataFromServer.length; i++) {
+
+                var lblSubscriber = '<div class="lblSubscriber">' + '<h3 class="lblSubscriberId">' + 'Id:' +
+                    ' ' +
+                    ajSubscriberDataFromServer[i].id + '</h3>' +
+                    '<h3 class="lblSubscriberName" data-subscriberName="' +
+                    ajSubscriberDataFromServer[i].name + '">' + 'Name:' + ' ' + ajSubscriberDataFromServer[
+                        i].name +
+                    '<h3 class ="lblSubscriberLastName" data-subscriberLastName="' +
+                    ajSubscriberDataFromServer[
+                        i].lastname +
+                    '">' + 'Lastname:' + ' ' + ajSubscriberDataFromServer[i].lastname + '</h3>' +
+                    '<h3 class="lblSubscriberEmail" data-subscriberEmail="' + ajSubscriberDataFromServer[i]
+                    .email +
+                    '">' +
+                    'Email:' + ' ' + ajSubscriberDataFromServer[i].email + '</h3>' +
+                    '<h3 class="lblSubscriberAddress" data-subscriberAddress="' +
+                    ajSubscriberDataFromServer[i]
+                    .address +
+                    '">' + 'Address:' + ' ' + ajSubscriberDataFromServer[i].address + '</h3>' + '</div>';
+
+                lblSubscriberList.insertAdjacentHTML('beforeend', lblSubscriber);
+
+            }
+
+        }
+
+        /************************************************************************/
+        /************************************************************************/
+        /************************************************************************/
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9B2bXFoPWTxOBsHs4d2FWqwp7GUlg--w&callback=initMap" async
+        defer>
+    </script>
+</body>
+
+</html>

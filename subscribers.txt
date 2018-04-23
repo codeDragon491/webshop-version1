@@ -1,0 +1,29 @@
+[
+    {
+        "id": "59d63f90ee8e2",
+        "email": "A",
+        "name": "A",
+        "lastname": "A",
+        "address": "A",
+        "latitude": "55.69905026964132",
+        "longtitude": "12.552824020385742"
+    },
+    {
+        "id": "59d63f9aa4aff",
+        "email": "B",
+        "name": "B",
+        "lastname": "B",
+        "address": "B",
+        "latitude": "55.69682523212549",
+        "longtitude": "12.55213737487793"
+    },
+    {
+        "id": "59d63fb9860fa",
+        "email": "C",
+        "name": "C",
+        "lastname": "C",
+        "address": "C",
+        "latitude": "55.69948558825364",
+        "longtitude": "12.540979385375977"
+    }
+]
