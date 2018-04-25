@@ -6,7 +6,7 @@ $sSearch = $_GET['search'];
 strtoupper($sSearch);
 
 //GETTING from the TEXT FILE:
-$sajProducts = file_get_contents('products.txt');
+$sajProducts = file_get_contents('../products.txt');
 $ajProducts = json_decode($sajProducts);
 
 $match_found = false;
