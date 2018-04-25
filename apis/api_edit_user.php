@@ -10,7 +10,7 @@ $sSaveFileTo = $sFolder . $sFileName;
 move_uploaded_file($_FILES['fileUserImage']['tmp_name'], $sSaveFileTo);
 
 //GETTING FROM FILE:
-$sajUsers = file_get_contents('users.txt');
+$sajUsers = file_get_contents('../users.txt');
 $ajUsers = json_decode($sajUsers);
 
 //_________________________________________________________//
