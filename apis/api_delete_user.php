@@ -1,7 +1,7 @@
 <?php
 
 //GETTING FROM FILE:
-$sajUsers = file_get_contents('users.txt');
+$sajUsers = file_get_contents('../users.txt');
 $ajUsers = json_decode($sajUsers);
 
 // Data comes from the browser
