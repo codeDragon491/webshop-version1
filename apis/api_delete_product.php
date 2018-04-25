@@ -5,7 +5,7 @@ $sProductId = $_GET['id'];
 //echo $sProductId;
 
 //GETTING FROM FILE:
-$sajProducts = file_get_contents('products.txt');
+$sajProducts = file_get_contents('../products.txt');
 $ajProducts = json_decode($sajProducts);
 
 $match_found = false;
