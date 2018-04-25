@@ -1,7 +1,7 @@
 <?php
 
 //GETTING FROM FILE:
-$sajProducts = file_get_contents( 'products.txt' );
+$sajProducts = file_get_contents( '../products.txt' );
 $ajProducts = json_decode( $sajProducts );
 
 usort( $ajProducts, sortHighToLow);
