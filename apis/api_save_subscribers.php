@@ -19,7 +19,7 @@ array_push( $ajSubscribers, $jNewSubsriber );
 // Encode all the users and save it to the file;
 $sajNewSubscribers = json_encode( $ajSubscribers, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE );   
 //echo $sajNewUsers;
-file_put_contents('subscribers.txt', $sajNewSubscribers);
+file_put_contents('../subscribers.txt', $sajNewSubscribers);
 
 // send this to the client
 $sjResponse = '{"status":"ok","id":"'.$sSubsriberId.'"}';
