@@ -8,7 +8,7 @@ $sSaveFileTo = $sFolder . $sFileName;
 move_uploaded_file($_FILES['fileProductImage']['tmp_name'], $sSaveFileTo);
 
 // Load all the products and decode them to an array
-$sajProducts = file_get_contents('products.txt');
+$sajProducts = file_get_contents('../products.txt');
 $ajProducts = json_decode($sajProducts); //turns the string it into an array.
 
 //If there is no array create it!
