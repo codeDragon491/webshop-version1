@@ -8,7 +8,7 @@ $sSaveFileTo = $sFolder . $sFileName;
 move_uploaded_file($_FILES['fileProductImage']['tmp_name'], $sSaveFileTo);
 
 //GETTING FROM FILE:
-$sajProducts = file_get_contents('products.txt');
+$sajProducts = file_get_contents('../products.txt');
 $ajProducts = json_decode($sajProducts);
 
 //_________________________________________________________//
