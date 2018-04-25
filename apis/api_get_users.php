@@ -1,7 +1,7 @@
 <?php 
 
 // Load all the users and decode them to an array
-$sajUsers = file_get_contents('users.txt');
+$sajUsers = file_get_contents('../users.txt');
 $ajUsers = json_decode($sajUsers);
 
 // Encode then back to a string for display
