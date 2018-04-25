@@ -3,7 +3,7 @@
 session_start();
 
 // Load all the users and decode them to an array
-$sajUsers = file_get_contents('users.txt');
+$sajUsers = file_get_contents('../users.txt');
 $ajUsers = json_decode($sajUsers); //turns the string into an array.
 
 // Data comes from the browser
