@@ -7,7 +7,7 @@ $sSaveFileTo = $sFolder . $sFileName;
 move_uploaded_file($_FILES['fileUserImage']['tmp_name'], $sSaveFileTo);
 
 // Load all the users and decode them to an array
-$sajUsers = file_get_contents('users.txt');
+$sajUsers = file_get_contents('../users.txt');
 $ajUsers = json_decode($sajUsers);
 
 $sNewUserEmailorPhoneNumber = $_POST['txtEmailorPhoneNumber'];
